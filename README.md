@@ -1,13 +1,12 @@
 # The Oxnead Pub Quiz
 
+{am i responsive}
 
-
-
-## Project Goals
+It is a game where the player has to answer all ten questions within sixty seconds.
 
 ## Contents
 
-[Design Concept](#design-concept)
+[Design](#design)
 
 [Features](#features)
 
@@ -17,7 +16,7 @@
 
 [Credits](#credits)
 
-## Design Concept
+## Design
 
 ## Features
 
@@ -26,6 +25,10 @@
 ### Features Left to Implement
 
 ## Testing
+
+### Tests Performed
+
+#### No Javascript support
 
 ### Validator Testing
 
