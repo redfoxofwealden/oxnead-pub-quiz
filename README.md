@@ -28,7 +28,13 @@ It is a game where the player has to answer all ten questions within sixty secon
 
 ### Tests Performed
 
-#### No Javascript support
+#### Test No Javascript support
+
+testing no script
+
+#### Test Background image
+
+testing background image displays as intended.
 
 ### Validator Testing
 
