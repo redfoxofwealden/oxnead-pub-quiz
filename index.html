@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="the Oxnead Pub Quiz">
+    <meta name="description" content="The Oxnead Pub Quiz">
     <meta name="keywords" content="quiz, pub, online, game">
 
     <link rel="stylesheet" href="assets/css/style.css">
@@ -12,37 +12,36 @@
 </head>
 <body>
     <main>
-        <div id="quiz">
-            <h1>The Oxnead Pub Quiz</h1>
-            <div id="score"></div>
-            <div id="timer-countdown"></div>
-            <div id="question"></div>
-            <button type="button" id="answer-1" data-iscorrect=""></button>
-            <button type="button" id="answer-2" data-iscorrect=""></button>
-            <button type="button" id="answer-3" data-iscorrect=""></button>
-            <button type="button" id="answer-4" data-iscorrect=""></button>
+        <div id="pub-quiz">
+            <div id="quiz-area">
+                <h1>The Oxnead Pub Quiz</h1>
+                <h2 id="time">Time remaining 0 seconds</h2>
+                <h2 id="inst-score-heading">Instructions</h2>
+                <p id="quiz-inst">The objective is to answer all ten questions within 60 seconds.
+                    To answer press or tap on one of the correct options below.
+                </p>
+                <button type="button" id="answer-1">Answer-a</button>
+                <button type="button" id="answer-2">Answer-a</button>
+                <button type="button" id="answer-3">Answer-a</button>
+                <button type="button" id="answer-4">Answer-a</button>
+                <button type="button" id="next">Next</button>
+                <button type="button" id="reset-start">Start</button>
+            </div>
         </div>
-    
-        <div id="instructions">
-            <p>
-                The objective is to answer all 10 questions
-                within 60 secomds.
-            </p>
-            <p>Click or tap on Start to start the game</p>
-            <button type="button">Start</button>
-        </div>   
     </main>
     
     <!--
-        This message below is displayed whenever:-
+        The message below is displayed whenever:-
         1. Javascript support is disabled or
         2. the browser does not support Javascript.
     -->
     <noscript>
         <div>
-            <h1>No Javascript support!</h1>
-            <p>This app requires Javascript to run. Either make sure that Javascript is enabled on this 
-                browser or run this app on a browser that supports Javascript.</p>    
+            <h1>The Oxnead Pub Quiz</h1>
+            <h2>No Javascript support detected</h2>
+            <p>This app requires Javascript to run. Make sure that Javascript 
+                is enabled or run this app on a browser 
+                that supports Javascript.</p>    
         </div>
     </noscript>
 </body>

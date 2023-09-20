@@ -8,25 +8,57 @@
 main {
     background: no-repeat center/cover url('../images/pexels-pixabay-63633.jpg');
     min-height: 100vh;
+    /*display: none;*/
 }
 
-#quiz,
-#instructions {
-    width: 500px;
-    height: 300px;
-    background: lightgrey;
-    border: 2px black solid;
-    border-radius: 2%;
+#pub-quiz {
+    background: #FBBA37;
+    border: 1rem #FFFFE0 double;
+    border-radius: 2rem;
+    padding: 1rem;
+    width: 100%;
+    max-width: 34rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
 }
 
-#quiz {
-    display: none;
+#quiz-area {
+    font-size: 1.5rem;
 }
+
+#quiz-inst {
+    margin: 2% 0;
+}
+
+#time,
+#inst-score-heading {
+    margin: 1% 0;
+}
+
+#quiz-area button {
+    width: 100%;
+    background: orange;
+    border: .2rem solid white;
+    border-radius: .5rem;
+    margin: 1.5% 0;
+    padding: .2rem;
+    font-size: 1.6rem;
+}
+
+/* No Javascript support */
 
 noscript div {
-    width: 22em;
+    width: 23rem;
+    font-size: 1.1rem;
     position: absolute;
     top: 50%;
     left: 50%;
     translate: -50% -50%;
+}
+
+noscript h1,
+noscript h2 {
+    text-align: center;
 }
