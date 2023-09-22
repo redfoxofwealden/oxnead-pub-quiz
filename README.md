@@ -30,10 +30,18 @@ The game uses one form for both instructions and game it self.
 
 ### Tests Performed
 
-#### Test No Javascript support
+#### No Javascript support testing
 
-testing no script
+To test how this website is displayed on a browser with no Javascript support, this site was deployed to GitHub.  Next the site was tested on Google Chrome with Javascript disabled. Disabling Javascript on Chrome was done as follows:
 
+1. Go to the settings menu
+1. Click on Privacy and security on the left menu
+1. Click on Site settings
+1. Click on Javascript
+1. Click on the option 'Don't allow sites to use Javascript'
+
+Javascript is now disabled and the testing of the site can be carried out.
+ 
 #### Test Background image
 
 testing background image displays as intended.
