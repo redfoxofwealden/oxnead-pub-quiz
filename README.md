@@ -59,7 +59,7 @@ The website is deployed as follows:
 
 - Navigate to oxnead-pub-quiz repository on github
 - Click on settings
-- Click on pages under Code and automation on the left
+- Click on Pages under Code and automation on the left
 - On GitHub Pages under Branch change the option from None to Main branch
 - Click on Save button to deploy to GitHub
 
