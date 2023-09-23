@@ -13,15 +13,23 @@ const buttonAnswer04 = document.getElementById('answer-4');
 const buttonNext = document.getElementById('next');
 const buttonResetStart = document.getElementById('reset-start');
 
-const paramsScoreTimer = {
-    Score: 0,
-    Timer: 99
+/**
+ * All global variables are stored here as properties
+ * 
+ */
+const paramsPubQuiz = {
+    score: 0,
+    timer: 99,
+    currentQuestion: 0,
+    questionList: []
 }
 
 /**
- * Questions
+ * List of 11 questions
+ * with correct answer and alternatives
  */
 const listOfQuestions = [
+    
     {
         question: 'What is the capital city of Czech Republic?',
         answer: 'Prague',
@@ -114,13 +122,88 @@ const listOfQuestions = [
 document.addEventListener('DOMContentLoaded', function(event) {
 
     /*
-        The first thing to do is
-        display the form.
+        The first thing to do is display the form.
     */
     document.getElementsByTagName('main').item(0).style.display = 'block';
 
-    let buttonNextDisable = buttonNext.getAttribute('disabled');
+    /*
+        Add event handlers
+    */
+    buttonAnswer01.addEventListener('click', eventAnswerButton01);
+    buttonAnswer02.addEventListener('click', eventAnswerButton02);
+    buttonAnswer03.addEventListener('click', eventAnswerButton03);
+    buttonAnswer04.addEventListener('click', eventAnswerButton04);
 
-    console.log(buttonNextDisable);
-
+    buttonNext.addEventListener('click', eventNext);
+    buttonResetStart.addEventListener('click', eventResetStart);
 });
+
+/**
+ * Generate a list of unique random integers from 0 to
+ * numOfElements and return them in an array.
+ */
+function generateArrayOfRanNums(numOfElements) {
+    
+    let arrOfNums = [];
+    let ranNum = 0;
+
+    for(let c = 0; c < numOfElements; c++) {
+        
+        do {
+            ranNum = parseInt(Math.random() * numOfElements);
+        } while(arrOfNums.find((element) => element === ranNum) !== undefined);
+        
+        arrOfNums.push(ranNum);
+    }
+
+    return arrOfNums;
+}
+
+function Test() {
+    paramsScoreTimer.questionList = generateArrayOfRanNums(listOfQuestions.length);
+
+    console.log(paramsScoreTimer.questionList);
+    console.log(listOfQuestions.length);
+
+    let m = generateArrayOfRanNums(4);
+    console.log('list of 4 integers');
+    console.log(m);
+}
+
+Test();
+
+/**
+ * event functions
+ */
+
+function eventAnswerButton01(event) {
+    console.log('Event fired button 1');
+}
+
+function eventAnswerButton02(event) {
+    console.log('Event fired 2');
+}
+
+function eventAnswerButton03(event) {
+    console.log('Event fired 3');
+}
+
+function eventAnswerButton04(event) {
+    console.log('Event fired 4');
+}
+
+function eventNext(event) {
+    console.log('Event fired next');
+}
+
+function eventResetStart(event) {
+    
+    buttonResetStart.innerText = (buttonResetStart.innerText === 'Start')
+        ? 'Reset' : 'Start';
+
+    buttonNext.disabled = (buttonNext.disabled === true)
+        ? false : true;
+
+    console.log('Event fired reset start');
+
+}
