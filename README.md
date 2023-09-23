@@ -34,8 +34,8 @@ The game uses one form for both instructions and game it self.
 
 1. Test event handlers after adding them to buttons
 1. Test functions generateArrayOfRanNums and generateArrayOfAnswers
-1. Test questions
-1. 
+1. Test start game feature
+1. Test reset feature
 
 #### No Javascript support testing
 
