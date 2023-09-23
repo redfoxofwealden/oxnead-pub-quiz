@@ -79,14 +79,6 @@ const listOfQuestions = [
     },
 
     {
-        question: 'What is the chemical symbol of aluminium?',
-        answer: 'Al',
-        option1: 'At',
-        option2: 'As',
-        option3: 'Ar'
-    },
-
-    {
         question: 'What is the chemical symbol of tungsten?',
         answer: 'W',
         option1: 'Ta',
