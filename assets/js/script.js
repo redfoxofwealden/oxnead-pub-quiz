@@ -20,12 +20,14 @@ const buttonResetStart = document.getElementById('reset-start');
 const paramsPubQuiz = {
     score: 0,
     timer: 99,
+    questionList: [],
+    currentAnswerOptions: [],
     currentQuestion: 0,
-    questionList: []
-}
+    isGameInPlay: false
+};
 
 /**
- * List of 11 questions
+ * List of 10 questions
  * with correct answer and alternatives
  */
 const listOfQuestions = [
@@ -111,6 +113,20 @@ const listOfQuestions = [
     }
 ];
 
+/**
+ * Number of possible answers
+ */
+const numOfOptions = 4;
+
+/**
+ * Colors used to color the background on buttons
+ * 
+ */
+const colorCorrect = 'green';
+const colorWrong = 'red';
+const colorCurrent = buttonAnswer01.style.backgroundColor;
+
+
 document.addEventListener('DOMContentLoaded', function(event) {
 
     /*
@@ -133,33 +149,205 @@ document.addEventListener('DOMContentLoaded', function(event) {
 /**
  * Generate a list of unique random integers from 0 to
  * numOfElements and return them in an array.
+ * 
+ * The parameter numOfElements must be of type number otherwise
+ * this functions returns undefined.
+ * 
  */
 function generateArrayOfRanNums(numOfElements) {
     
-    let arrOfNums = [];
-    let ranNum = 0;
+    if (typeof(numOfElements) === 'number') {
 
-    for(let c = 0; c < numOfElements; c++) {
-        
-        do {
-            ranNum = parseInt(Math.random() * numOfElements);
-        } while(arrOfNums.find((element) => element === ranNum) !== undefined);
-        
-        arrOfNums.push(ranNum);
+        let arrOfNums = [];
+        let ranNum = 0;
+    
+        for(let c = 0; c < numOfElements; c++) {
+            
+            do {
+                ranNum = parseInt(Math.random() * numOfElements);
+            } while(arrOfNums.find((element) => element === ranNum) !== undefined);
+            
+            arrOfNums.push(ranNum);
+        }
+    
+        return arrOfNums;
+    } else {
+        return undefined;
     }
+}
 
-    return arrOfNums;
+/**
+ * Generate an array of possible answers
+ * in random order. 
+ * 
+ * The parameter questionAnswer has to be of type Object with
+ * question, answer, option1, option2, option3 properties
+ * otherwise it returns undefined.
+ * 
+ */
+function generateArrayOfAnswers(questionAnswers) {
+    
+    if (questionAnswers !== null && typeof(questionAnswers) === 'object') {
+        let ansArrList = generateArrayOfRanNums(numOfOptions);
+        let answerList = [];
+
+        for (let i = 0; i < numOfOptions; i++) {
+            
+            switch (ansArrList[i]) {
+                case 0:
+                    answerList.push( {
+                        answerOption: questionAnswers.answer,
+                        isCorrect: true
+                    } );
+                    break;
+
+                case 1:
+                    answerList.push( {
+                        answerOption: questionAnswers.option1,
+                        isCorrect: false
+                    } );
+                    break;
+
+                case 2:
+                    answerList.push( {
+                        answerOption: questionAnswers.option2,
+                        isCorrect: false
+                    } );
+                    break;
+
+                case 3:
+                    answerList.push( {
+                        answerOption: questionAnswers.option3,
+                        isCorrect: false
+                    } );
+                    break;
+            }
+        }
+
+        return answerList;
+    } else {
+        
+        return undefined;
+    }
+}
+
+/**
+ * Reset all properties in paramsPubQuiz
+ * 
+ */
+function resetGame() {
+
+    paramsPubQuiz.score = 0;
+    paramsPubQuiz.timer = 99;
+    paramsPubQuiz.currentQuestion = 0;
+}
+
+function resetButtonsBackgroundColor() {
+
+    buttonAnswer01.style.backgroundColor = colorCurrent;
+    buttonAnswer02.style.backgroundColor = colorCurrent;
+    buttonAnswer03.style.backgroundColor = colorCurrent;
+    buttonAnswer04.style.backgroundColor = colorCurrent;
+}
+
+/**
+ * 
+ */
+function setBackgroundButtonColor(index, backgroundColour) {
+
+    if (typeof(index) === 'number' && typeof(backgroundColour) === 'string') {
+
+        switch (index) {
+
+            case 0:
+                buttonAnswer01.style.backgroundColor = backgroundColour;
+                break;
+
+            case 1:
+                buttonAnswer02.style.backgroundColor = backgroundColour;
+                break;
+
+            case 2:
+                buttonAnswer03.style.backgroundColor = backgroundColour;
+                break;
+
+            case 3:
+                buttonAnswer04.style.backgroundColor = backgroundColour;
+                break;
+
+        }
+    } else {
+
+        throw new Error('index, background must be of correct type');
+    }
+}
+
+/**
+ * Change background color of button pressed
+ * according whether the player is correct or not.
+ * 
+ */
+function showIsAnswerCorrect(index) {
+
+    if (typeof(index) === 'number') {
+
+        let currentMessage = '';
+
+        if (paramsPubQuiz.currentAnswerOptions[index].isCorrect) {
+            
+            setBackgroundButtonColor(index, colorCorrect);
+
+            currentMessage = quizInstBoard.innerText;
+            currentMessage += 'Correct!';
+            quizInstBoard.innerText = currentMessage;
+        } else {
+
+            setBackgroundButtonColor(index, colorWrong);
+ 
+            let correctAnswer = paramsPubQuiz.currentAnswerOptions.
+                find((element) => element.isCorrect === true).answerOption;
+            
+            currentMessage = quizInstBoard.innerText;
+            currentMessage +=  `Wrong! The correct answer is ${correctAnswer}`;
+            quizInstBoard.innerText = currentMessage;
+        }
+
+        buttonNext.disabled = false;
+        paramsPubQuiz.isGameInPlay = false;
+    } else {
+
+        throw new Error('index must be of type number');
+    }
+}
+
+/**
+ * Display the question
+ * 
+ * Set all answer buttons
+ * 
+ */
+function showNextQuestion () {
+
+    quizInstBoard.innerText = listOfQuestions[paramsPubQuiz.currentQuestion].question;
+
+    let listOfAnswers = generateArrayOfAnswers(listOfQuestions[paramsPubQuiz.currentQuestion]);
+    paramsPubQuiz.currentAnswerOptions = listOfAnswers;
+
+    buttonAnswer01.innerText = listOfAnswers[0].answerOption;
+    buttonAnswer02.innerText = listOfAnswers[1].answerOption;
+    buttonAnswer03.innerText = listOfAnswers[2].answerOption;
+    buttonAnswer04.innerText = listOfAnswers[3].answerOption;
+
+    resetButtonsBackgroundColor();
+
+    paramsPubQuiz.isGameInPlay = true;
+    buttonNext.disabled = true;
+    paramsPubQuiz.currentQuestion++;
 }
 
 function Test() {
-    paramsScoreTimer.questionList = generateArrayOfRanNums(listOfQuestions.length);
-
-    console.log(paramsScoreTimer.questionList);
-    console.log(listOfQuestions.length);
-
-    let m = generateArrayOfRanNums(4);
-    console.log('list of 4 integers');
-    console.log(m);
+    
+    console.log('Test function called');
 }
 
 Test();
@@ -169,33 +357,72 @@ Test();
  */
 
 function eventAnswerButton01(event) {
-    console.log('Event fired button 1');
+ 
+    if (paramsPubQuiz.isGameInPlay) {
+
+        showIsAnswerCorrect(0);
+    }
 }
 
 function eventAnswerButton02(event) {
-    console.log('Event fired 2');
-}
+
+    if (paramsPubQuiz.isGameInPlay) {
+        
+        showIsAnswerCorrect(1);
+    }
+}    
+
 
 function eventAnswerButton03(event) {
-    console.log('Event fired 3');
+
+    if (paramsPubQuiz.isGameInPlay) {
+        
+        showIsAnswerCorrect(2);
+    }
 }
 
 function eventAnswerButton04(event) {
-    console.log('Event fired 4');
+
+    if (paramsPubQuiz.isGameInPlay) {
+
+        showIsAnswerCorrect(3);
+    }
 }
 
 function eventNext(event) {
-    console.log('Event fired next');
+    
+    showNextQuestion();
 }
 
 function eventResetStart(event) {
     
-    buttonResetStart.innerText = (buttonResetStart.innerText === 'Start')
-        ? 'Reset' : 'Start';
+    if (buttonResetStart.getAttribute('data-fieldtype') === 'start') {
 
-    buttonNext.disabled = (buttonNext.disabled === true)
-        ? false : true;
+        resetGame();
+        showNextQuestion();
 
-    console.log('Event fired reset start');
+        buttonResetStart.setAttribute('data-fieldtype', 'reset');
+        buttonResetStart.innerText = 'Reset';
 
+        paramsPubQuiz.isGameInPlay = true;
+    
+    } else if (buttonResetStart.getAttribute('data-fieldtype') === 'reset') {
+
+        quizInstBoard.innerText = instructionsText;
+        scoreBoard.innerText = instructionsHeader;
+
+        // Clear all texts from answer button
+        buttonAnswer01.innerText = '';
+        buttonAnswer02.innerText = '';
+        buttonAnswer03.innerText = '';
+        buttonAnswer04.innerText = '';
+
+        resetButtonsBackgroundColor();
+        
+        buttonResetStart.setAttribute('data-fieldtype', 'start');
+        buttonResetStart.innerText = 'Start';
+        buttonNext.disabled = true;
+
+        paramsPubQuiz.isGameInPlay = false;
+    }
 }

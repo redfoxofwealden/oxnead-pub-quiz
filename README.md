@@ -30,6 +30,13 @@ The game uses one form for both instructions and game it self.
 
 ### Tests Performed
 
+#### Testing during Javascript development
+
+1. Test event handlers after adding them to buttons
+1. Test functions generateArrayOfRanNums and generateArrayOfAnswers
+1. Test questions
+1. 
+
 #### No Javascript support testing
 
 To test how this website is displayed on a browser with no Javascript support, this site was deployed to GitHub.  Next the site was tested on Google Chrome with Javascript disabled. Disabling Javascript on Chrome was done as follows:
