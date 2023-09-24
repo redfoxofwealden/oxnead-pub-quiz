@@ -1,14 +1,17 @@
 const timeBoard = document.getElementById('time');
 const scoreBoard = document.getElementById('inst-score-heading');
 const quizInstBoard = document.getElementById('quiz-inst');
+const quizFeedback = document.getElementById('quiz-feedback');
 
 const instructionsText = quizInstBoard.innerText;
 const instructionsHeader = scoreBoard.innerText;
 
-const buttonAnswer01 = document.getElementById('answer-1');
-const buttonAnswer02 = document.getElementById('answer-2');
-const buttonAnswer03 = document.getElementById('answer-3');
-const buttonAnswer04 = document.getElementById('answer-4');
+const buttonsList = [
+    document.getElementById('answer-1'),
+    document.getElementById('answer-2'),
+    document.getElementById('answer-3'),
+    document.getElementById('answer-4')
+];
 
 const buttonNext = document.getElementById('next');
 const buttonResetStart = document.getElementById('reset-start');
@@ -48,7 +51,7 @@ const colorWrong = 'red';
  * resetButtonsBackgroundColor() function.
  * 
  */
-const colorOriginal = buttonAnswer01.style.backgroundColor;
+const colorOriginal = buttonsList[0].style.backgroundColor;
 
 /**
  * List of 10 questions
@@ -148,11 +151,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
     /*
         Add event handlers
     */
-    buttonAnswer01.addEventListener('click', eventAnswerButton01);
-    buttonAnswer02.addEventListener('click', eventAnswerButton02);
-    buttonAnswer03.addEventListener('click', eventAnswerButton03);
-    buttonAnswer04.addEventListener('click', eventAnswerButton04);
-
+    for(let btttn of buttonsList) {
+        btttn.addEventListener('click', eventAnswerButton);
+    }
+    
     buttonNext.addEventListener('click', eventNext);
     buttonResetStart.addEventListener('click', eventResetStart);
 });
@@ -176,7 +178,7 @@ function generateArrayOfRanNums(numOfElements) {
             
             do {
                 ranNum = parseInt(Math.random() * numOfElements);
-            } while(arrOfNums.find((element) => element === ranNum) !== undefined);
+            } while (arrOfNums.find((element) => element === ranNum) !== undefined);
             
             arrOfNums.push(ranNum);
         }
@@ -264,58 +266,13 @@ function resetGame() {
     paramsPubQuiz.score = 0;
     paramsPubQuiz.timer = 99;
     paramsPubQuiz.currentQuestion = 0;
+    paramsPubQuiz.questionList = generateArrayOfRanNums(listOfQuestions.length);
 }
 
 function resetButtonsBackgroundColor() {
 
-    buttonAnswer01.style.backgroundColor = colorOriginal;
-    buttonAnswer02.style.backgroundColor = colorOriginal;
-    buttonAnswer03.style.backgroundColor = colorOriginal;
-    buttonAnswer04.style.backgroundColor = colorOriginal;
-}
-
-/**
- * Sets the background color of one of the answer buttons
- * 
- * parameters: index must be integer, from 0 to 3
- *             backgroundColor must be string type
- * 
- * if the integer in index is outside the accepted range (0 to 3)
- * the function throws an exception.
- * 
- * if the parameters are not of the accepted type an 
- * exception will be thrown.
- * 
- */
-function setBackgroundButtonColor(index, backgroundColour) {
-
-    if (Number.isInteger(index) && typeof(backgroundColour) === 'string') {
-
-        switch (index) {
-
-            case 0:
-                buttonAnswer01.style.backgroundColor = backgroundColour;
-                break;
-
-            case 1:
-                buttonAnswer02.style.backgroundColor = backgroundColour;
-                break;
-
-            case 2:
-                buttonAnswer03.style.backgroundColor = backgroundColour;
-                break;
-
-            case 3:
-                buttonAnswer04.style.backgroundColor = backgroundColour;
-                break;
-            
-            default:
-                throw new Error('index must be integer in range 0 to 3.');
-
-        }
-    } else {
-
-        throw new Error('index must be an integer, backgroundColor must be a string');
+    for(let bttnElement of buttonsList) {
+        bttnElement.style.backgroundColor = colorOriginal;
     }
 }
 
@@ -336,21 +293,19 @@ function showIsAnswerCorrect(index) {
 
         if (paramsPubQuiz.currentAnswerOptions[index].isCorrect) {
             
-            setBackgroundButtonColor(index, colorCorrect);
-
-            currentMessage = quizInstBoard.innerText;
-            currentMessage += 'Correct!';
-            quizInstBoard.innerText = currentMessage;
+            buttonsList[index].style.backgroundColor = colorCorrect;
+            quizFeedback.innerText = 'Correct !';
+            paramsPubQuiz.score++;
+            showScore();
+            
         } else {
 
-            setBackgroundButtonColor(index, colorWrong);
+            buttonsList[index].style.backgroundColor = colorWrong;
  
             let correctAnswer = paramsPubQuiz.currentAnswerOptions.
                 find((element) => element.isCorrect === true).answerOption;
-            
-            currentMessage = quizInstBoard.innerText;
-            currentMessage +=  `Wrong! The correct answer is ${correctAnswer}`;
-            quizInstBoard.innerText = currentMessage;
+                
+            quizFeedback.innerText = `Wrong! The correct answer is ${correctAnswer}`;
         }
 
         buttonNext.disabled = false;
@@ -369,21 +324,27 @@ function showIsAnswerCorrect(index) {
  */
 function showNextQuestion () {
 
-    quizInstBoard.innerText = listOfQuestions[paramsPubQuiz.currentQuestion].question;
+    let quizIndex = paramsPubQuiz.questionList[paramsPubQuiz.currentQuestion];
+    quizInstBoard.innerText = listOfQuestions[quizIndex].question;
 
-    let listOfAnswers = generateArrayOfAnswers(listOfQuestions[paramsPubQuiz.currentQuestion]);
+    let listOfAnswers = generateArrayOfAnswers(listOfQuestions[quizIndex]);
     paramsPubQuiz.currentAnswerOptions = listOfAnswers;
 
-    buttonAnswer01.innerText = listOfAnswers[0].answerOption;
-    buttonAnswer02.innerText = listOfAnswers[1].answerOption;
-    buttonAnswer03.innerText = listOfAnswers[2].answerOption;
-    buttonAnswer04.innerText = listOfAnswers[3].answerOption;
+    for (let indx = 0; indx < buttonsList.length; indx++) {
+        buttonsList[indx].innerText = listOfAnswers[indx].answerOption;
+    }
 
     resetButtonsBackgroundColor();
 
+    quizFeedback.innerText = '';
     paramsPubQuiz.isGameInPlay = true;
     buttonNext.disabled = true;
     paramsPubQuiz.currentQuestion++;
+}
+
+function showScore() {
+
+    scoreBoard.innerText = `Score is ${paramsPubQuiz.score} of 10`;
 }
 
 function Test() {
@@ -395,38 +356,14 @@ Test();
 
 /**
  * event functions
+ * 
  */
 
-function eventAnswerButton01(event) {
+function eventAnswerButton(event) {
  
     if (paramsPubQuiz.isGameInPlay) {
-
-        showIsAnswerCorrect(0);
-    }
-}
-
-function eventAnswerButton02(event) {
-
-    if (paramsPubQuiz.isGameInPlay) {
         
-        showIsAnswerCorrect(1);
-    }
-}    
-
-
-function eventAnswerButton03(event) {
-
-    if (paramsPubQuiz.isGameInPlay) {
-        
-        showIsAnswerCorrect(2);
-    }
-}
-
-function eventAnswerButton04(event) {
-
-    if (paramsPubQuiz.isGameInPlay) {
-
-        showIsAnswerCorrect(3);
+        showIsAnswerCorrect(buttonsList.indexOf(this));
     }
 }
 
@@ -440,6 +377,7 @@ function eventResetStart(event) {
     if (buttonResetStart.getAttribute('data-fieldtype') === 'start') {
 
         resetGame();
+        showScore();
         showNextQuestion();
 
         buttonResetStart.setAttribute('data-fieldtype', 'reset');
@@ -453,13 +391,13 @@ function eventResetStart(event) {
         scoreBoard.innerText = instructionsHeader;
 
         // Clear all texts from answer buttons
-        buttonAnswer01.innerText = '';
-        buttonAnswer02.innerText = '';
-        buttonAnswer03.innerText = '';
-        buttonAnswer04.innerText = '';
-
+        for (let button of buttonsList) {
+            button.innerText = '';
+        }
+     
         resetButtonsBackgroundColor();
-        
+
+        quizFeedback.innerText = '';
         buttonResetStart.setAttribute('data-fieldtype', 'start');
         buttonResetStart.innerText = 'Start';
         buttonNext.disabled = true;

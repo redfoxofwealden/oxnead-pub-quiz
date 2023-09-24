@@ -36,6 +36,7 @@ The game uses one form for both instructions and game it self.
 1. Test functions generateArrayOfRanNums and generateArrayOfAnswers
 1. Test start game feature
 1. Test reset feature
+1. Test score feature
 
 #### No Javascript support testing
 
