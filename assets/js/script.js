@@ -27,8 +27,33 @@ const paramsPubQuiz = {
 };
 
 /**
+ * Number of possible answer options.
+ * 
+ */
+const numOfOptions = 4;
+
+/**
+ * Colors used to color the background on buttons
+ * these constants below are used by
+ * 
+ * showIsAnswerCorrect() function.
+ * 
+ */
+const colorCorrect = 'green';
+const colorWrong = 'red';
+
+/**
+ * The constant below is used by
+ * 
+ * resetButtonsBackgroundColor() function.
+ * 
+ */
+const colorOriginal = buttonAnswer01.style.backgroundColor;
+
+/**
  * List of 10 questions
- * with correct answer and alternatives
+ * with correct answer and other possible answers.
+ * 
  */
 const listOfQuestions = [
     
@@ -113,20 +138,6 @@ const listOfQuestions = [
     }
 ];
 
-/**
- * Number of possible answers
- */
-const numOfOptions = 4;
-
-/**
- * Colors used to color the background on buttons
- * 
- */
-const colorCorrect = 'green';
-const colorWrong = 'red';
-const colorCurrent = buttonAnswer01.style.backgroundColor;
-
-
 document.addEventListener('DOMContentLoaded', function(event) {
 
     /*
@@ -150,13 +161,13 @@ document.addEventListener('DOMContentLoaded', function(event) {
  * Generate a list of unique random integers from 0 to
  * numOfElements and return them in an array.
  * 
- * The parameter numOfElements must be of type number otherwise
- * this functions returns undefined.
+ * The parameter numOfElements must be an integer otherwise
+ * this functions throws an exception.
  * 
  */
 function generateArrayOfRanNums(numOfElements) {
     
-    if (typeof(numOfElements) === 'number') {
+    if (Number.isInteger(numOfElements)) {
 
         let arrOfNums = [];
         let ranNum = 0;
@@ -172,7 +183,8 @@ function generateArrayOfRanNums(numOfElements) {
     
         return arrOfNums;
     } else {
-        return undefined;
+        
+        throw new Error('numOfElements must be an integer');
     }
 }
 
@@ -181,13 +193,25 @@ function generateArrayOfRanNums(numOfElements) {
  * in random order. 
  * 
  * The parameter questionAnswer has to be of type Object with
- * question, answer, option1, option2, option3 properties
- * otherwise it returns undefined.
+ * the following properties:
+ *     question,
+ *     answer,
+ *     option1,
+ *     option2,
+ *     option3
+ * 
+ * otherwise it throws an exception.
  * 
  */
 function generateArrayOfAnswers(questionAnswers) {
     
-    if (questionAnswers !== null && typeof(questionAnswers) === 'object') {
+    if (typeof(questionAnswers) === 'object' &&
+        questionAnswers.hasOwnProperty('question') &&
+        questionAnswers.hasOwnProperty('answer') &&
+        questionAnswers.hasOwnProperty('option1') &&
+        questionAnswers.hasOwnProperty('option2') &&
+        questionAnswers.hasOwnProperty('option3') ) {
+        
         let ansArrList = generateArrayOfRanNums(numOfOptions);
         let answerList = [];
 
@@ -227,7 +251,7 @@ function generateArrayOfAnswers(questionAnswers) {
         return answerList;
     } else {
         
-        return undefined;
+        throw new Error('questionAnswers must be object type with the correct properties.');
     }
 }
 
@@ -244,18 +268,28 @@ function resetGame() {
 
 function resetButtonsBackgroundColor() {
 
-    buttonAnswer01.style.backgroundColor = colorCurrent;
-    buttonAnswer02.style.backgroundColor = colorCurrent;
-    buttonAnswer03.style.backgroundColor = colorCurrent;
-    buttonAnswer04.style.backgroundColor = colorCurrent;
+    buttonAnswer01.style.backgroundColor = colorOriginal;
+    buttonAnswer02.style.backgroundColor = colorOriginal;
+    buttonAnswer03.style.backgroundColor = colorOriginal;
+    buttonAnswer04.style.backgroundColor = colorOriginal;
 }
 
 /**
+ * Sets the background color of one of the answer buttons
+ * 
+ * parameters: index must be integer, from 0 to 3
+ *             backgroundColor must be string type
+ * 
+ * if the integer in index is outside the accepted range (0 to 3)
+ * the function throws an exception.
+ * 
+ * if the parameters are not of the accepted type an 
+ * exception will be thrown.
  * 
  */
 function setBackgroundButtonColor(index, backgroundColour) {
 
-    if (typeof(index) === 'number' && typeof(backgroundColour) === 'string') {
+    if (Number.isInteger(index) && typeof(backgroundColour) === 'string') {
 
         switch (index) {
 
@@ -274,11 +308,14 @@ function setBackgroundButtonColor(index, backgroundColour) {
             case 3:
                 buttonAnswer04.style.backgroundColor = backgroundColour;
                 break;
+            
+            default:
+                throw new Error('index must be integer in range 0 to 3.');
 
         }
     } else {
 
-        throw new Error('index, background must be of correct type');
+        throw new Error('index must be an integer, backgroundColor must be a string');
     }
 }
 
@@ -286,10 +323,14 @@ function setBackgroundButtonColor(index, backgroundColour) {
  * Change background color of button pressed
  * according whether the player is correct or not.
  * 
+ * parameter: index must be an integer.
+ * 
+ * otherwise an exception will be thrown.
+ * 
  */
 function showIsAnswerCorrect(index) {
 
-    if (typeof(index) === 'number') {
+    if (Number.isInteger(index)) {
 
         let currentMessage = '';
 
@@ -316,7 +357,7 @@ function showIsAnswerCorrect(index) {
         paramsPubQuiz.isGameInPlay = false;
     } else {
 
-        throw new Error('index must be of type number');
+        throw new Error('index must be an integer');
     }
 }
 
@@ -411,7 +452,7 @@ function eventResetStart(event) {
         quizInstBoard.innerText = instructionsText;
         scoreBoard.innerText = instructionsHeader;
 
-        // Clear all texts from answer button
+        // Clear all texts from answer buttons
         buttonAnswer01.innerText = '';
         buttonAnswer02.innerText = '';
         buttonAnswer03.innerText = '';
