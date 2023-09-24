@@ -1,3 +1,4 @@
+const quizArea = document.getElementById('quiz-area');
 const timeBoard = document.getElementById('time');
 const scoreBoard = document.getElementById('inst-score-heading');
 const quizInstBoard = document.getElementById('quiz-inst');
@@ -16,13 +17,21 @@ const buttonsList = [
 const buttonNext = document.getElementById('next');
 const buttonResetStart = document.getElementById('reset-start');
 
+const quizFinale = document.getElementById('quiz-finale');
+const quizFinaleHead = document.getElementById('quiz-finale-head');
+const quizFinaleMessage = document.getElementById('quiz-finale-message');
+const buttonClose = document.getElementById('button-close');
+
+const timeInterval = 60;
+
 /**
  * All global variables are stored here as properties
  * 
  */
 const paramsPubQuiz = {
     score: 0,
-    timer: 99,
+    timer: timeInterval,
+    timerID: 0,
     questionList: [],
     currentAnswerOptions: [],
     currentQuestion: 0,
@@ -157,6 +166,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
     
     buttonNext.addEventListener('click', eventNext);
     buttonResetStart.addEventListener('click', eventResetStart);
+
+    buttonClose.addEventListener('click', eventClose);
 });
 
 /**
@@ -258,13 +269,43 @@ function generateArrayOfAnswers(questionAnswers) {
 }
 
 /**
+ * Reset button to Start
+ * 
+ */
+function restartGame() {
+
+    timeBoard.innerText = '';
+    quizFeedback.innerText = '';
+    quizInstBoard.innerText = instructionsText;
+    scoreBoard.innerText = instructionsHeader;
+
+    // Clear all texts from answer buttons
+    for (let button of buttonsList) {
+        button.innerText = '';
+    }
+ 
+    resetButtonsBackgroundColor();
+
+    buttonResetStart.setAttribute('data-fieldtype', 'start');
+    buttonResetStart.innerText = 'Start';
+    buttonNext.disabled = true;
+
+    paramsPubQuiz.isGameInPlay = false;
+    if (paramsPubQuiz.timerID !== 0) {
+        
+        clearInterval(paramsPubQuiz.timerID);
+        paramsPubQuiz.timerID = 0;
+    }
+}
+
+/**
  * Reset all properties in paramsPubQuiz
  * 
  */
 function resetGame() {
 
     paramsPubQuiz.score = 0;
-    paramsPubQuiz.timer = 99;
+    paramsPubQuiz.timer = timeInterval;
     paramsPubQuiz.currentQuestion = 0;
     paramsPubQuiz.questionList = generateArrayOfRanNums(listOfQuestions.length);
 }
@@ -274,6 +315,26 @@ function resetButtonsBackgroundColor() {
     for(let bttnElement of buttonsList) {
         bttnElement.style.backgroundColor = colorOriginal;
     }
+}
+
+function showFinaleMessage() {
+    
+    quizFinaleMessage.innerText = 
+        `You've scored ${paramsPubQuiz.score} out of ${listOfQuestions.length}!`;
+
+    if (paramsPubQuiz.score === listOfQuestions.length) {
+
+        quizFinaleHead.innerText = 'Congratulations!';
+    } else if (paramsPubQuiz.timer === 0) {
+
+        quizFinaleHead.innerText = 'Times Up!';
+    } else {
+
+        quizFinaleHead.innerText = '';
+    }
+
+    quizArea.style.display = 'none';
+    quizFinale.style.display = 'block';
 }
 
 /**
@@ -308,8 +369,6 @@ function showIsAnswerCorrect(index) {
             quizFeedback.innerText = `Wrong! The correct answer is ${correctAnswer}`;
         }
 
-        buttonNext.disabled = false;
-        paramsPubQuiz.isGameInPlay = false;
     } else {
 
         throw new Error('index must be an integer');
@@ -324,35 +383,40 @@ function showIsAnswerCorrect(index) {
  */
 function showNextQuestion () {
 
-    let quizIndex = paramsPubQuiz.questionList[paramsPubQuiz.currentQuestion];
-    quizInstBoard.innerText = listOfQuestions[quizIndex].question;
+    if (paramsPubQuiz.currentQuestion === listOfQuestions.length) {
 
-    let listOfAnswers = generateArrayOfAnswers(listOfQuestions[quizIndex]);
-    paramsPubQuiz.currentAnswerOptions = listOfAnswers;
+        showFinaleMessage();
+        if (paramsPubQuiz.timerID !== 0) {
+        
+            clearInterval(paramsPubQuiz.timerID);
+            paramsPubQuiz.timerID = 0;
+        }
+        
+        } else {
 
-    for (let indx = 0; indx < buttonsList.length; indx++) {
-        buttonsList[indx].innerText = listOfAnswers[indx].answerOption;
-    }
-
-    resetButtonsBackgroundColor();
-
-    quizFeedback.innerText = '';
-    paramsPubQuiz.isGameInPlay = true;
-    buttonNext.disabled = true;
-    paramsPubQuiz.currentQuestion++;
+        let quizIndex = paramsPubQuiz.questionList[paramsPubQuiz.currentQuestion];
+        quizInstBoard.innerText = listOfQuestions[quizIndex].question;
+    
+        let listOfAnswers = generateArrayOfAnswers(listOfQuestions[quizIndex]);
+        paramsPubQuiz.currentAnswerOptions = listOfAnswers;
+    
+        for (let indx = 0; indx < buttonsList.length; indx++) {
+            buttonsList[indx].innerText = listOfAnswers[indx].answerOption;
+        }
+    
+        resetButtonsBackgroundColor();
+    
+        quizFeedback.innerText = '';
+        paramsPubQuiz.isGameInPlay = true;
+        buttonNext.disabled = true;
+        paramsPubQuiz.currentQuestion++;
+    } 
 }
 
 function showScore() {
 
     scoreBoard.innerText = `Score is ${paramsPubQuiz.score} of 10`;
 }
-
-function Test() {
-    
-    console.log('Test function called');
-}
-
-Test();
 
 /**
  * event functions
@@ -364,6 +428,9 @@ function eventAnswerButton(event) {
     if (paramsPubQuiz.isGameInPlay) {
         
         showIsAnswerCorrect(buttonsList.indexOf(this));
+
+        buttonNext.disabled = false;
+        paramsPubQuiz.isGameInPlay = false;
     }
 }
 
@@ -382,26 +449,35 @@ function eventResetStart(event) {
 
         buttonResetStart.setAttribute('data-fieldtype', 'reset');
         buttonResetStart.innerText = 'Reset';
-
         paramsPubQuiz.isGameInPlay = true;
+
+        paramsPubQuiz.timerID = setInterval(eventTimer, 1000);
+        timeBoard.innerText = `Time remaing is ${paramsPubQuiz.timer} seconds`;
     
     } else if (buttonResetStart.getAttribute('data-fieldtype') === 'reset') {
 
-        quizInstBoard.innerText = instructionsText;
-        scoreBoard.innerText = instructionsHeader;
+        restartGame();
+    }
+}
 
-        // Clear all texts from answer buttons
-        for (let button of buttonsList) {
-            button.innerText = '';
-        }
-     
-        resetButtonsBackgroundColor();
+function eventClose(event) {
 
-        quizFeedback.innerText = '';
-        buttonResetStart.setAttribute('data-fieldtype', 'start');
-        buttonResetStart.innerText = 'Start';
-        buttonNext.disabled = true;
+    resetGame();
+    restartGame();
 
-        paramsPubQuiz.isGameInPlay = false;
+    quizFinale.style.display = 'none';
+    quizArea.style.display = 'block';
+}
+
+function eventTimer(event) {
+
+    if (paramsPubQuiz.timer > 0) {
+
+        timeBoard.innerText = `Time remaing is ${paramsPubQuiz.timer--} seconds`;
+    } else {
+
+        showFinaleMessage();
+        clearInterval(paramsPubQuiz.timerID);
+        paramsPubQuiz.timerID = 0;
     }
 }

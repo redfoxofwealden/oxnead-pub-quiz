@@ -37,6 +37,8 @@ The game uses one form for both instructions and game it self.
 1. Test start game feature
 1. Test reset feature
 1. Test score feature
+1. Test finale message feature
+1. Test timer feature
 
 #### No Javascript support testing
 
@@ -47,6 +49,7 @@ To test how this website is displayed on a browser with no Javascript support, t
 1. Click on Site settings
 1. Click on Javascript
 1. Click on the option 'Don't allow sites to use Javascript'
+
 
 Javascript is now disabled and the testing of the site can be carried out.
  

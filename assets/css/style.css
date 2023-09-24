@@ -22,7 +22,8 @@ main {
     display: none;
 }
 
-#quiz-area {
+#quiz-area,
+#quiz-finale {
     background: #FBBA37;
     border: .5rem #FFFFE0 double;
     border-radius: 1rem;
@@ -35,7 +36,7 @@ main {
     max-height: 500px;
 
     /*
-        Position the 'quiz-area' in the center
+        Position form in the center
         of the viewport of the browser.
     */
     position: absolute;
@@ -44,7 +45,8 @@ main {
     translate: -50% -50%;
 }
 
-#quiz-area h1 {
+#quiz-area h1,
+#quiz-finale h1 {
     font-size: 1.5rem;
     text-align: center;
 }
@@ -60,7 +62,8 @@ main {
     margin: 2% 0;
 }
 
-#quiz-buttons {
+#quiz-buttons,
+#quiz-finale-button {
     width: inherit;
     padding: inherit;
     position: absolute;
@@ -69,7 +72,8 @@ main {
     translate: -50%;
 }
 
-#quiz-buttons button {
+#quiz-buttons button,
+#button-close {
     width: 100%;
     background: orange;
     border: .2rem solid white;
@@ -78,6 +82,34 @@ main {
     padding: .2rem;
     font-size: 1.4rem;
     height: 2.8rem;
+}
+
+/* quiz-finale section */
+
+#quiz-finale {
+    display: none;
+}
+
+#quiz-finale-head {
+    text-align: center;
+    margin: 2% 0;
+
+    font-size: 1.8rem;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    translate: -50%;
+}
+
+#quiz-finale-message {
+    text-align: center;
+    margin: 2% 0;
+
+    font-size: 1.8rem;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    translate: -50%;
 }
 
 /* No Javascript support */
