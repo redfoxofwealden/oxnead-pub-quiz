@@ -1,8 +1,8 @@
 # The Oxnead Pub Quiz
 
-{am i responsive}
+![am i reponsive image](readme/amireponsive.png)
 
-It is a game where the player has to answer all ten questions within sixty seconds.
+The live website can be found [here](https://redfoxofwealden.github.io/oxnead-pub-quiz/).
 
 ## Contents
 
@@ -18,11 +18,13 @@ It is a game where the player has to answer all ten questions within sixty secon
 
 ## Design
 
-The game uses one form for both instructions and game it self.
+It is a game where the player has to answer all ten questions within sixty seconds. The game asks ten questins in random order, with each question being asked only once per gaming session. The user reponds to each question by tapping on one of the four buttons. Each button display a possible answer. The background colour goes green when the user selects the correct answer, red if the answer is wrong. After all the questions have been asked, a form will be displayed showing the score. A congratulatory message will be displayed if all questions have been correctly. A \'Times Up!\' message will be displayed if the time has elapsed and the user has not answered all the questions. The user at any time can stop the game by tapping \'Reset\' and this will take it back to the home page.
 
 ## Features
 
 ### Existing Features
+
+![Home page](readme/home-page.png)
 
 ### Features Left to Implement
 
@@ -33,7 +35,7 @@ The game uses one form for both instructions and game it self.
 #### Testing during Javascript development
 
 1. Test event handlers after adding them to buttons
-1. Test functions generateArrayOfRanNums and generateArrayOfAnswers
+1. Test functions randoniser functions
 1. Test start game feature
 1. Test reset feature
 1. Test score feature
@@ -50,9 +52,8 @@ To test how this website is displayed on a browser with no Javascript support, t
 1. Click on Javascript
 1. Click on the option 'Don't allow sites to use Javascript'
 
-
 Javascript is now disabled and the testing of the site can be carried out.
- 
+
 #### Test Background image
 
 testing background image displays as intended.
@@ -88,6 +89,15 @@ The website is now available [here](https://redfoxofwealden.github.io/oxnead-pub
 
 ### Content
 
+use of short hand notation from MDN
+
+use of timer from MDN.
+
+
 ### Media
 
 The background image was downloaded from [Pexels](https://www.pexels.com/).
+
+favicon from Google Fonts
+
+
