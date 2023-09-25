@@ -152,21 +152,16 @@ const listOfQuestions = [
 
 document.addEventListener('DOMContentLoaded', function(event) {
 
-    /*
-        The first thing to do is display the form.
-    */
+    // The first thing to do is display the form.
+    
     document.getElementsByTagName('main').item(0).style.display = 'block';
 
-    /*
-        Add event handlers
-    */
     for(let btttn of buttonsList) {
         btttn.addEventListener('click', eventAnswerButton);
     }
     
     buttonNext.addEventListener('click', eventNext);
     buttonResetStart.addEventListener('click', eventResetStart);
-
     buttonClose.addEventListener('click', eventClose);
 });
 
@@ -268,11 +263,24 @@ function generateArrayOfAnswers(questionAnswers) {
     }
 }
 
+function haltGameShowResult() {
+
+    stopTimerEvent();
+    switchToStart();
+    showFinaleMessage();
+}
+
+function stopTimerEvent() {
+
+    clearInterval(paramsPubQuiz.timerID);
+}
+
 /**
- * Reset button to Start
+ * Set the button with id attribute 'reset-start'
+ * to Start functionality.
  * 
  */
-function restartGame() {
+function switchToStart() {
 
     timeBoard.innerText = '';
     quizFeedback.innerText = '';
@@ -289,20 +297,14 @@ function restartGame() {
     buttonResetStart.setAttribute('data-fieldtype', 'start');
     buttonResetStart.innerText = 'Start';
     buttonNext.disabled = true;
-
     paramsPubQuiz.isGameInPlay = false;
-    if (paramsPubQuiz.timerID !== 0) {
-        
-        clearInterval(paramsPubQuiz.timerID);
-        paramsPubQuiz.timerID = 0;
-    }
 }
 
 /**
  * Reset all properties in paramsPubQuiz
  * 
  */
-function resetGame() {
+function resetParamsPubQuiz() {
 
     paramsPubQuiz.score = 0;
     paramsPubQuiz.timer = timeInterval;
@@ -319,12 +321,13 @@ function resetButtonsBackgroundColor() {
 
 function showFinaleMessage() {
     
-    quizFinaleMessage.innerText = 
+    let scoreMessage =
         `You've scored ${paramsPubQuiz.score} out of ${listOfQuestions.length}!`;
 
     if (paramsPubQuiz.score === listOfQuestions.length) {
 
         quizFinaleHead.innerText = 'Congratulations!';
+        scoreMessage = `You've got all ${listOfQuestions.length} questions right!`;
     } else if (paramsPubQuiz.timer === 0) {
 
         quizFinaleHead.innerText = 'Times Up!';
@@ -332,6 +335,8 @@ function showFinaleMessage() {
 
         quizFinaleHead.innerText = '';
     }
+
+    quizFinaleMessage.innerText = scoreMessage;
 
     quizArea.style.display = 'none';
     quizFinale.style.display = 'block';
@@ -349,8 +354,6 @@ function showFinaleMessage() {
 function showIsAnswerCorrect(index) {
 
     if (Number.isInteger(index)) {
-
-        let currentMessage = '';
 
         if (paramsPubQuiz.currentAnswerOptions[index].isCorrect) {
             
@@ -385,14 +388,8 @@ function showNextQuestion () {
 
     if (paramsPubQuiz.currentQuestion === listOfQuestions.length) {
 
-        showFinaleMessage();
-        if (paramsPubQuiz.timerID !== 0) {
-        
-            clearInterval(paramsPubQuiz.timerID);
-            paramsPubQuiz.timerID = 0;
-        }
-        
-        } else {
+        haltGameShowResult();        
+    } else {
 
         let quizIndex = paramsPubQuiz.questionList[paramsPubQuiz.currentQuestion];
         quizInstBoard.innerText = listOfQuestions[quizIndex].question;
@@ -443,7 +440,7 @@ function eventResetStart(event) {
     
     if (buttonResetStart.getAttribute('data-fieldtype') === 'start') {
 
-        resetGame();
+        resetParamsPubQuiz();
         showScore();
         showNextQuestion();
 
@@ -456,14 +453,12 @@ function eventResetStart(event) {
     
     } else if (buttonResetStart.getAttribute('data-fieldtype') === 'reset') {
 
-        restartGame();
+        stopTimerEvent();
+        switchToStart();
     }
 }
 
 function eventClose(event) {
-
-    resetGame();
-    restartGame();
 
     quizFinale.style.display = 'none';
     quizArea.style.display = 'block';
@@ -476,8 +471,6 @@ function eventTimer(event) {
         timeBoard.innerText = `Time remaing is ${paramsPubQuiz.timer--} seconds`;
     } else {
 
-        showFinaleMessage();
-        clearInterval(paramsPubQuiz.timerID);
-        paramsPubQuiz.timerID = 0;
+        haltGameShowResult();
     }
 }
