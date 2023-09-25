@@ -40,6 +40,8 @@ If the player successfully answer all questions in the alloted time a congratula
 
 ### Features Left to Implement
 
+There are no features left to implement.
+
 ## Testing
 
 ### Tests Performed
@@ -116,10 +118,11 @@ The website is now available [here](https://redfoxofwealden.github.io/oxnead-pub
 
 ### Content
 
-use of short hand notation from MDN
+The use of short hand notation in find method of the array was copied and modified from MDN
 
-use of timer from MDN.
+[array find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find). Also the use of find in arrays was taken from [w3schools array find](https://www.w3schools.com/jsref/jsref_find.asp).
 
+The use of the timer function used was taken from [w3schools](https://www.w3schools.com/js/js_timing.asp).
 
 ### Media
 
