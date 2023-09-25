@@ -32,9 +32,11 @@ At the end of the game one of the three pages will be displayed depending on the
 
 ![score page](readme/quiz-score-result.png)
 
+If the user does not answer within the time limit, the game will stop and the message shown below is displayed.
+
 ![times up page](readme/times-up-result.png)
 
-If the player successfully answer all questions in the alloted time a congratulatory message is displayed as below.
+If the player successfully answer all questions within the alloted time a congratulatory message is displayed as below.
 
 ![congratulation page](readme/congrats-all-questions-result.png)
 
@@ -76,6 +78,8 @@ testing background image displays as intended.
 
 #### Responsive Testing
 
+The website was tested on Google Chrome using the reponsive feature on web developer tools. The site was tested against: iPhoneSE, iPhoneXR, iPhone Pro 12, Pixel 5, Samsung Galaxy S8+, Samsung Galaxy S20 Ultra, iPad Air, iPad Mini, Surface Pro 7, Surface Duo, Galaxy Fold, Samsung Galaxy A51/71, Nest Hub, Nest Hub Max, Facebook on Android v407 on Pixel 6.
+
 #### HTML Validation Test
 
 Test site used: [W3C HTML validation test site](https://validator.w3.org/#validate_by_input)
@@ -102,6 +106,8 @@ The code was uploaded to JSHint, tested and no errors were found.
 
 ### Unfixed Bugs
 
+There are no known bugs. All code was tested repeatably until code is working correctly.
+
 ## Deployment
 
 The website is deployed as follows:
@@ -116,13 +122,15 @@ The website is now available [here](https://redfoxofwealden.github.io/oxnead-pub
 
 ## Credits
 
-### Content
+### Resources
 
 The use of short hand notation in find method of the array was copied and modified from MDN
 
 [array find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find). Also the use of find in arrays was taken from [w3schools array find](https://www.w3schools.com/jsref/jsref_find.asp).
 
 The use of the timer function used was taken from [w3schools](https://www.w3schools.com/js/js_timing.asp).
+
+The use of the error objects to throw an exception was inspired and taken from [MDN website](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw).
 
 ### Media
 
