@@ -52,7 +52,9 @@ To test how this website is displayed on a browser with no Javascript support, t
 1. Click on Javascript
 1. Click on the option 'Don't allow sites to use Javascript'
 
-Javascript is now disabled and the testing of the site can be carried out.
+Javascript is now disabled and the testing of the site can be carried out. The worked fine with bugs detected. The message appears as shown below.
+
+![javascript no support warning](readme/no-javascript-warning.png)
 
 #### Test Background image
 
@@ -82,7 +84,7 @@ To pass the test the css property, translate, had to be changed to transform.
 
 Test site used: [JSHint](https://jshint.com/)
 
-The code was uploaded to this website and no errors were found.
+The code was uploaded to JSHint, tested and no errors were found.
 
 ### Unfixed Bugs
 
