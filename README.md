@@ -24,7 +24,19 @@ It is a game where the player has to answer all ten questions within sixty secon
 
 ### Existing Features
 
+The Oxnead Pub Quiz features a Instructions, which also serves as a home page.
+
 ![Home page](readme/home-page.png)
+
+At the end of the game one of the three pages will be displayed depending on the score achieved.
+
+![score page](readme/quiz-score-result.png)
+
+![times up page](readme/times-up-result.png)
+
+If the player successfully answer all questions in the alloted time a congratulatory message is displayed as below.
+
+![congratulation page](readme/congrats-all-questions-result.png)
 
 ### Features Left to Implement
 
@@ -112,5 +124,8 @@ use of timer from MDN.
 ### Media
 
 The background image was downloaded from [Pexels](https://www.pexels.com/).
+The link to the background image is [here](https://www.pexels.com/photo/blue-harp-decor-on-brown-wooden-table-63633/).
 
-favicon from Google Fonts
+The favicon used was download from Google Fonts [Google Fonts](https://fonts.google.com/icons?selected=Material+Symbols+Outlined:sports_bar:FILL@0;wght@400;GRAD@0;opsz@24&icon.query=beer)
+
+The png file was then converted into a favicon using this website [ionos](https://www.ionos.co.uk/tools/favicon-generator#tool).
