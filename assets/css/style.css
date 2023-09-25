@@ -42,7 +42,7 @@ main {
     position: absolute;
     left: 50%;
     top: 50%;
-    translate: -50% -50%;
+    transform: translate(-50%, -50%);
 }
 
 #quiz-area h1,
@@ -69,7 +69,7 @@ main {
     position: absolute;
     left: 50%;
     bottom: 0;
-    translate: -50%;
+    transform: translate(-50%);
 }
 
 #quiz-buttons button,
@@ -98,7 +98,7 @@ main {
     position: absolute;
     top: 20%;
     left: 50%;
-    translate: -50%;
+    transform: translate(-50%);
 }
 
 #quiz-finale-message {
@@ -109,7 +109,7 @@ main {
     position: absolute;
     top: 40%;
     left: 50%;
-    translate: -50%;
+    transform: translate(-50%);
 }
 
 /* No Javascript support */
@@ -120,7 +120,7 @@ noscript div {
     position: absolute;
     top: 50%;
     left: 50%;
-    translate: -50% -50%;
+    transform: translate(-50%, -50%);
 }
 
 noscript h1,
