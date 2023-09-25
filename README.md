@@ -60,16 +60,29 @@ testing background image displays as intended.
 
 #### Responsive Testing
 
-### Validator Testing
+#### HTML Validation Test
 
-- HTML
-  - No errors ...
+Test site used: [W3C HTML validation test site](https://validator.w3.org/#validate_by_input)
 
-- CSS
-  - No errors ...
+The attribute used, disabled, had to be changed from 'disabled="true", to 'disabled' to pass.
 
-- JavaScript
-  - No errors found ...
+![html validation test result](readme/w3c-html-validation-test-result.png)
+
+No errors were found however six warnings have issued: most to do with empty headings and two to do with use of \'h1\' elements.
+
+#### CSS Validation Test
+
+Test site used: [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/#validate_by_input)
+
+To pass the test the css property, translate, had to be changed to transform.
+
+  ![css validation test result](readme/w3c-css-validation-test-result.png)
+
+#### Javascript Validation Test
+
+Test site used: [JSHint](https://jshint.com/)
+
+The code was uploaded to this website and no errors were found.
 
 ### Unfixed Bugs
 
@@ -99,5 +112,3 @@ use of timer from MDN.
 The background image was downloaded from [Pexels](https://www.pexels.com/).
 
 favicon from Google Fonts
-
-
