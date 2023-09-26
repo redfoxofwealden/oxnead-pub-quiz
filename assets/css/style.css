@@ -12,6 +12,11 @@
     described below.
 */
 main {
+    /*
+        The background image was taken from Pexels website.
+        The link to the image where it was downloaded from is here below
+        (https://www.pexels.com/photo/blue-harp-decor-on-brown-wooden-table-63633/)
+    */
     background: no-repeat center/cover url('../images/pexels-pixabay-63633.jpg');
     min-height: 100vh;
 

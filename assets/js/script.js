@@ -1,3 +1,6 @@
+/*
+    'quiz-area' elements
+*/
 const quizArea = document.getElementById('quiz-area');
 const timeBoard = document.getElementById('time');
 const scoreBoard = document.getElementById('inst-score-heading');
@@ -17,11 +20,15 @@ const buttonsList = [
 const buttonNext = document.getElementById('next');
 const buttonResetStart = document.getElementById('reset-start');
 
+/*
+    'quiz-finale' elements
+*/
 const quizFinale = document.getElementById('quiz-finale');
 const quizFinaleHead = document.getElementById('quiz-finale-head');
 const quizFinaleMessage = document.getElementById('quiz-finale-message');
 const buttonClose = document.getElementById('button-close');
 
+// timeInverval is expressed in seconds
 const timeInterval = 60;
 
 /**
@@ -50,14 +57,14 @@ const paramsPubQuiz = {
     currentQuestion: 0,
     
     /*
-        isGameInPlay is by eventAnswerButton() function to
+        repondToAnswerButtonEvents is by eventAnswerButton() function to
         prevent it from reponding to user taps or clicks.
         Although it would have been simpler to use the 
         'disabled' attribute that would have resulted in
         the button being 'greyed out'. To prevent the 'greying out'
         the property is used instead.
     */    
-    isGameInPlay: false
+    respondToAnswerButtonEvents: false
 };
 
 /**
@@ -330,7 +337,7 @@ function switchToStart() {
     buttonResetStart.setAttribute('data-fieldtype', 'start');
     buttonResetStart.innerText = 'Start';
     buttonNext.disabled = true;
-    paramsPubQuiz.isGameInPlay = false;
+    paramsPubQuiz.respondToAnswerButtonEvents = false;
 }
 
 /**
@@ -437,15 +444,15 @@ function showNextQuestion () {
         resetButtonsBackgroundColor();
     
         quizFeedback.innerText = '';
-        paramsPubQuiz.isGameInPlay = true;
         buttonNext.disabled = true;
+        paramsPubQuiz.respondToAnswerButtonEvents = true;
         paramsPubQuiz.currentQuestion++;
     } 
 }
 
 function showScore() {
 
-    scoreBoard.innerText = `Score is ${paramsPubQuiz.score} of ${questionList.length}`;
+    scoreBoard.innerText = `Score is ${paramsPubQuiz.score} of ${listOfQuestions.length}`;
 }
 
 /**
@@ -456,7 +463,7 @@ function showScore() {
 
 function eventAnswerButton(event) {
  
-    if (paramsPubQuiz.isGameInPlay) {
+    if (paramsPubQuiz.respondToAnswerButtonEvents) {
         
         showIsAnswerCorrect(buttonsList.indexOf(this));
 
@@ -464,7 +471,7 @@ function eventAnswerButton(event) {
 
         // Prevent this event from reponding to user's taps
         // or clicks until the next question is displayed.
-        paramsPubQuiz.isGameInPlay = false;
+        paramsPubQuiz.respondToAnswerButtonEvents = false;
     }
 }
 
@@ -483,7 +490,7 @@ function eventResetStart(event) {
 
         buttonResetStart.setAttribute('data-fieldtype', 'reset');
         buttonResetStart.innerText = 'Reset';
-        paramsPubQuiz.isGameInPlay = true;
+        paramsPubQuiz.respondToAnswerButtonEvents = true;
 
         paramsPubQuiz.timerID = setInterval(eventTimer, 1000);
         timeBoard.innerText = `Time remaing is ${paramsPubQuiz.timer} seconds`;
