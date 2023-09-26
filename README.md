@@ -108,6 +108,14 @@ The code was uploaded to JSHint, tested and no errors were found.
 
 The reports have been genereated using Google Chrome after deployment to GitHub.
 
+##### Mobile devices
+
+![lighthouse report for mobile devices](readme/lighthouse-report-mobile.png)
+
+##### Desktop devices
+
+![lighthouse report for desktop devices](readme/lighthouse-report-desktop.png)
+
 ### Unfixed Bugs
 
 There are no known bugs. All code was tested repeatably until code is working correctly.
