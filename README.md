@@ -18,17 +18,23 @@ The live website can be found [here](https://redfoxofwealden.github.io/oxnead-pu
 
 ## Design
 
-It is a game where the player has to answer all ten questions within sixty seconds. The game asks ten questins in random order, with each question being asked only once per gaming session. The user reponds to each question by tapping on one of the four buttons. Each of the 4 buttons display a possible answer in random order. The background colour goes green when the user selects the correct answer, red if the answer is wrong. After all the questions have been asked, a form will be displayed showing the score. A congratulatory message will be displayed if all questions have been correctly. A \'Times Up!\' message will be displayed if the time has elapsed and the user has not answered all the questions. The user at any time can stop the game by tapping \'Reset\' and this will take it back to the home page.
+It is a game where the player has to answer all ten questions within sixty seconds. The game asks ten questins in random order, with each question being asked only once per gaming session. The user reponds to each question by tapping on one of the four buttons. Each of the 4 buttons display a possible answer in random order. The background colour goes green when the user selects the correct answer, red if the answer is wrong. After all the questions have been asked, a form will be displayed showing the score. A congratulatory message will be displayed if all the questions have been correctly. A \'Times Up!\' message will be displayed if the time has elapsed and the user has not answered all the questions. The user at any time can stop the game by tapping \'Reset\' and this will take it back to the home page.
+
+### Detects whether javascript is supported on the browser
+
+The first thing the website does is detect whether the browser supports javascript. If it does the form is display. Otherwise a no javascript support error message is displayed and does nothing afterwards.
 
 ## Features
 
 ### Home page
 
-The Oxnead Pub Quiz features a Instructions, which also serves as a home page.
+The Oxnead Pub Quiz features a Instructions, which also serves as a home page. This is also the page that the site returns to after the user taps or clicks on Reset button.
 
 ![Home page](readme/home-page.png)
 
 At the end of the game one of the three pages will be displayed depending on the score achieved.
+
+If the user all the questions and gets one or more within the time limit it displays the score as shown below.
 
 ![score page](readme/quiz-score-result.png)
 
@@ -36,7 +42,7 @@ If the user does not answer within the time limit, the game will stop and the me
 
 ![times up page](readme/times-up-result.png)
 
-If the player successfully answer all questions within the alloted time a congratulatory message is displayed as below.
+If the player gets all the questions right within the alloted time a congratulatory message is displayed as below.
 
 ![congratulation page](readme/congrats-all-questions-result.png)
 
@@ -48,15 +54,21 @@ There are no features left to implement.
 
 ### Tests Performed
 
-#### Testing during Javascript development
+The following tests were carried out during the development of the game.
+
+#### Testing during development
+
+During the development the use of exception, i.e the use of the throw command, was used in functions where arguments are used. An exception would be generated if the arguments passes are not of the correct type, i.e. string, number, object, boolean etc.
 
 1. Test event handlers after adding them to buttons
 1. Test functions randoniser functions
 1. Test start game feature
 1. Test reset feature
 1. Test score feature
-1. Test finale message feature
+1. Test finale message feature at the end of the game
 1. Test timer feature
+
+The testing was carried repeatedly until no exceptions were generated and no bugs were found and errors were encountered.
 
 #### No Javascript support testing
 
@@ -74,17 +86,17 @@ Javascript is now disabled and the testing of the site can be carried out. The w
 
 #### Test Background image
 
-The background has been tested to ensure it covers the whole window in the browser.
+The background has been tested to ensure it covers the whole viewport in the browser.
 
 #### Responsive Testing
 
-The website was tested on Google Chrome using the reponsive feature on web developer tools. The site was tested against these devices: iPhoneSE, iPhoneXR, iPhone Pro 12, Pixel 5, Samsung Galaxy S8+, Samsung Galaxy S20 Ultra, iPad Air, iPad Mini, Surface Pro 7, Surface Duo, Galaxy Fold, Samsung Galaxy A51/71, Nest Hub, Nest Hub Max, Facebook on Android v407 on Pixel 6.
+The website was tested on Google Chrome using the responsive feature on web developer tools. The site was tested against these devices: iPhoneSE, iPhoneXR, iPhone Pro 12, Pixel 5, Samsung Galaxy S8+, Samsung Galaxy S20 Ultra, iPad Air, iPad Mini, Surface Pro 7, Surface Duo, Galaxy Fold, Samsung Galaxy A51/71, Nest Hub, Nest Hub Max, Facebook on Android v407 on Pixel 6.
 
 #### HTML Validation Test
 
 Test site used: [W3C HTML validation test site](https://validator.w3.org/#validate_by_input)
 
-The attribute used, disabled, had to be changed from 'disabled="true", to 'disabled' to pass.
+The attribute used on one the buttons, disabled, had to be changed from 'disabled="true", to 'disabled' to pass the html validation test.
 
 ![html validation test result](readme/w3c-html-validation-test-result.png)
 
@@ -106,7 +118,7 @@ The code was uploaded to JSHint, tested and no errors were found.
 
 #### Lighthouse reports
 
-The reports have been genereated using Google Chrome after deployment to GitHub.
+The reports have been genereated using Google Chrome after deployment to GitHub: one for mobile devices, the other for desktop.
 
 ##### Mobile devices
 

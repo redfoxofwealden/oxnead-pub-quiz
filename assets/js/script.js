@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
  * Generate a list of unique random integers from 0 to
  * numOfElements and return them in an array.
  * 
- * The parameter numOfElements must be an integer otherwise
+ * The argument numOfElements must be an integer otherwise
  * this functions throws an exception.
  * 
  */
@@ -236,11 +236,11 @@ function generateArrayOfRanNums(numOfElements) {
  * Each element in the array is an object containing
  * these properties: answerOption, isCorrect.
  * 
- * answerOption:   possible answer
+ * answerOption:   a string of a possible answer
  * isCorrent:      contains a boolean indicating whether
  *                 answerOption is the correct answer.
  * 
- * The parameter questionAnswer has to be of type Object with
+ * The argument questionAnswers has to be of type object with
  * the following properties:
  *     question,
  *     answer,
@@ -386,7 +386,7 @@ function showFinaleMessage() {
  * Change background color of button pressed
  * according whether the player is correct or not.
  * 
- * parameter: index must be an integer.
+ * argument: index must be an integer.
  * 
  * otherwise an exception will be thrown.
  * 
