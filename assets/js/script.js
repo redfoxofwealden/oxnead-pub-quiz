@@ -26,15 +26,37 @@ const timeInterval = 60;
 
 /**
  * All global variables are stored here as properties
+ * of paramPubQuiz.
  * 
  */
 const paramsPubQuiz = {
     score: 0,
+
+    /*
+        timer property keeps track of time remaining in seconds.
+
+        timerID is used by SetInterval() in eventResetStart() function.
+    */
     timer: timeInterval,
     timerID: 0,
+
+    /*
+        questionList contains an array of integers arranged in 
+        random order representing each question in listOfQuestions.
+    */
     questionList: [],
+
     currentAnswerOptions: [],
     currentQuestion: 0,
+    
+    /*
+        isGameInPlay is by eventAnswerButton() function to
+        prevent it from reponding to user taps or clicks.
+        Although it would have been simpler to use the 
+        'disabled' attribute that would have resulted in
+        the button being 'greyed out'. To prevent the 'greying out'
+        the property is used instead.
+    */    
     isGameInPlay: false
 };
 
@@ -184,6 +206,12 @@ function generateArrayOfRanNums(numOfElements) {
             
             do {
                 ranNum = parseInt(Math.random() * numOfElements);
+
+                /* 
+                    The use of the short hand notation in the find() was copied and
+                    modified from the MDN site. The link is below
+                    (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find)
+                */
             } while (arrOfNums.find((element) => element === ranNum) !== undefined);
             
             arrOfNums.push(ranNum);
@@ -197,8 +225,13 @@ function generateArrayOfRanNums(numOfElements) {
 }
 
 /**
- * Generate an array of possible answers
- * in random order. 
+ * Generate an array of possible answers in random order.
+ * Each element in the array is an object containing
+ * these properties: answerOption, isCorrect.
+ * 
+ * answerOption:   possible answer
+ * isCorrent:      contains a boolean indicating whether
+ *                 answerOption is the correct answer.
  * 
  * The parameter questionAnswer has to be of type Object with
  * the following properties:
@@ -208,7 +241,7 @@ function generateArrayOfRanNums(numOfElements) {
  *     option2,
  *     option3
  * 
- * otherwise it throws an exception.
+ * otherwise it throws an exception and it immediately aborts.
  * 
  */
 function generateArrayOfAnswers(questionAnswers) {
@@ -412,11 +445,12 @@ function showNextQuestion () {
 
 function showScore() {
 
-    scoreBoard.innerText = `Score is ${paramsPubQuiz.score} of 10`;
+    scoreBoard.innerText = `Score is ${paramsPubQuiz.score} of ${questionList.length}`;
 }
 
 /**
- * event functions
+ * All the functions that handle events
+ * are here below.
  * 
  */
 
@@ -427,6 +461,9 @@ function eventAnswerButton(event) {
         showIsAnswerCorrect(buttonsList.indexOf(this));
 
         buttonNext.disabled = false;
+
+        // Prevent this event from reponding to user's taps
+        // or clicks until the next question is displayed.
         paramsPubQuiz.isGameInPlay = false;
     }
 }
