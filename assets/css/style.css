@@ -34,16 +34,11 @@ main {
     border-radius: 1rem;
     padding: .5rem;
     min-width: 280px;
-    min-height: 600px;
+    /*min-height: 600px;*/
     width: 100%;
-    height: 100%;
+    height: 600px;
     max-width: 420px;
-    max-height: 851px;
-
-    /*
-        Position form in the center
-        of the viewport of the browser.
-    */
+    /*max-height: 600px;*/
     position: absolute;
     left: 50%;
     top: 50%;
@@ -89,7 +84,7 @@ main {
     height: 2.8rem;
 }
 
-/* quiz-finale section */
+/* 'quiz-finale' div */
 
 #quiz-finale {
     display: none;
@@ -98,7 +93,6 @@ main {
 #quiz-finale-head {
     text-align: center;
     margin: 2% 0;
-
     font-size: 1.8rem;
     position: absolute;
     top: 20%;
@@ -109,12 +103,15 @@ main {
 #quiz-finale-message {
     text-align: center;
     margin: 2% 0;
-
     font-size: 1.8rem;
     position: absolute;
     top: 40%;
     left: 50%;
     transform: translate(-50%);
+}
+
+.hide-show-elements {
+    display: none;
 }
 
 /* No Javascript support */

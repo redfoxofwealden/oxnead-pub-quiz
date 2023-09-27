@@ -102,9 +102,9 @@ Test site used: [W3C HTML validation test site](https://validator.w3.org/#valida
 
 The attribute, disabled, used on one the buttons had to be changed from, disabled="true", to 'disabled' to pass the html validation test.
 
-![html validation test result](readme/w3c-html-validation-test-result.png)
+![html validation test result](readme/w3c-html-validation-test.png)
 
-No errors were found however six warnings have issued: most to do with empty headings and two to do with use of \'h1\' elements.
+No errors were found however four warnings have issued: all to do with empty headings on the '\h2'\ elements.
 
 #### CSS Validation Test
 
@@ -112,7 +112,7 @@ Test site used: [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator
 
 To pass the test the css property, translate, had to be changed to transform with the translate function. After this change the result is as displayed below.
 
-  ![css validation test result](readme/w3c-css-validation-test-result.png)
+  ![css validation test result](readme/w3c-css-validation-test.png)
 
 #### Javascript Validation Test
 

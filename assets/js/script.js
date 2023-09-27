@@ -20,6 +20,8 @@ const buttonsList = [
 const buttonNext = document.getElementById('next');
 const buttonResetStart = document.getElementById('reset-start');
 
+const classHideShowElements = document.getElementsByClassName('hide-show-elements');
+
 /*
     'quiz-finale' elements
 */
@@ -31,17 +33,15 @@ const buttonClose = document.getElementById('button-close');
 // timeInverval is expressed in seconds
 const timeInterval = 60;
 
-/**
- * All global variables are stored here as properties
- * of paramPubQuiz.
- * 
+/*
+    All global variables are stored here as properties
+    of paramPubQuiz.
  */
 const paramsPubQuiz = {
     score: 0,
 
     /*
         timer property keeps track of time remaining in seconds.
-
         timerID is used by SetInterval() in eventResetStart() function.
     */
     timer: timeInterval,
@@ -57,8 +57,8 @@ const paramsPubQuiz = {
     currentQuestion: 0,
     
     /*
-        repondToAnswerButtonEvents is by eventAnswerButton() function to
-        prevent it from reponding to user taps or clicks.
+        repondToAnswerButtonEvents is used by eventAnswerButton() function
+        to prevent it from reponding to user taps or clicks.
         Although it would have been simpler to use the 
         'disabled' attribute that would have resulted in
         the button being 'greyed out'. To prevent the 'greying out'
@@ -67,35 +67,22 @@ const paramsPubQuiz = {
     respondToAnswerButtonEvents: false
 };
 
-/**
- * Number of possible answer options.
- * 
- */
 const numOfOptions = 4;
 
-/**
- * Colors used to color the background on buttons
- * these constants below are used by
- * 
- * showIsAnswerCorrect() function.
- * 
+/*
+    Colors used to color the background on buttons
+    these constants below are used by 
+    showIsAnswerCorrect() function.
  */
 const colorCorrect = 'green';
 const colorWrong = 'red';
 
-/**
- * The constant below is used by
- * 
- * resetButtonsBackgroundColor() function.
- * 
- */
+/*
+    The constant colorOriginal is used by
+    resetButtonsBackgroundColor() function.
+*/
 const colorOriginal = buttonsList[0].style.backgroundColor;
 
-/**
- * List of 10 questions
- * with correct answer and other possible answers.
- * 
- */
 const listOfQuestions = [
     
     {
@@ -179,10 +166,16 @@ const listOfQuestions = [
     }
 ];
 
+/**
+ * Main entry point
+ * 
+ * 1. display the main element
+ * 2. add event handlers
+ * 
+ */
 document.addEventListener('DOMContentLoaded', function(event) {
 
-    // The first thing to do is display the form.
-    
+    // The first thing to do is display the main element.    
     document.getElementsByTagName('main').item(0).style.display = 'block';
 
     for(let btttn of buttonsList) {
@@ -237,16 +230,13 @@ function generateArrayOfRanNums(numOfElements) {
  * these properties: answerOption, isCorrect.
  * 
  * answerOption:   a string of a possible answer
+ * 
  * isCorrent:      contains a boolean indicating whether
  *                 answerOption is the correct answer.
  * 
  * The argument questionAnswers has to be of type object with
  * the following properties:
- *     question,
- *     answer,
- *     option1,
- *     option2,
- *     option3
+ * question, answer, option1, option2, option3.
  * 
  * otherwise it throws an exception and it immediately aborts.
  * 
@@ -310,6 +300,35 @@ function haltGameShowResult() {
     showFinaleMessage();
 }
 
+function hideClassHideShowElements() {
+
+    for (let i of classHideShowElements) {
+        i.style.display = 'none';
+    }
+}
+
+function resetButtonsBackgroundColor() {
+
+    for(let bttnElement of buttonsList) {
+        bttnElement.style.backgroundColor = colorOriginal;
+    }
+}
+
+function resetParamsPubQuiz() {
+
+    paramsPubQuiz.score = 0;
+    paramsPubQuiz.timer = timeInterval;
+    paramsPubQuiz.currentQuestion = 0;
+    paramsPubQuiz.questionList = generateArrayOfRanNums(listOfQuestions.length);
+}
+
+function showClassHideShowElements() {
+
+    for (let i of classHideShowElements) {
+        i.style.display = 'block';
+    }
+}
+
 function stopTimerEvent() {
 
     clearInterval(paramsPubQuiz.timerID);
@@ -338,25 +357,8 @@ function switchToStart() {
     buttonResetStart.innerText = 'Start';
     buttonNext.disabled = true;
     paramsPubQuiz.respondToAnswerButtonEvents = false;
-}
 
-/**
- * Reset all properties in paramsPubQuiz
- * 
- */
-function resetParamsPubQuiz() {
-
-    paramsPubQuiz.score = 0;
-    paramsPubQuiz.timer = timeInterval;
-    paramsPubQuiz.currentQuestion = 0;
-    paramsPubQuiz.questionList = generateArrayOfRanNums(listOfQuestions.length);
-}
-
-function resetButtonsBackgroundColor() {
-
-    for(let bttnElement of buttonsList) {
-        bttnElement.style.backgroundColor = colorOriginal;
-    }
+    hideClassHideShowElements();
 }
 
 function showFinaleMessage() {
@@ -386,7 +388,7 @@ function showFinaleMessage() {
  * Change background color of button pressed
  * according whether the player is correct or not.
  * 
- * argument: index must be an integer.
+ * argument index must be an integer.
  * 
  * otherwise an exception will be thrown.
  * 
@@ -455,11 +457,7 @@ function showScore() {
     scoreBoard.innerText = `Score is ${paramsPubQuiz.score} of ${listOfQuestions.length}`;
 }
 
-/**
- * All the functions that handle events
- * are here below.
- * 
- */
+// All the functions that handle events are here below.
 
 function eventAnswerButton(event) {
  
@@ -494,7 +492,9 @@ function eventResetStart(event) {
 
         paramsPubQuiz.timerID = setInterval(eventTimer, 1000);
         timeBoard.innerText = `Time remaing is ${paramsPubQuiz.timer} seconds`;
-    
+
+        showClassHideShowElements();
+
     } else if (buttonResetStart.getAttribute('data-fieldtype') === 'reset') {
 
         stopTimerEvent();
