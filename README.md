@@ -68,7 +68,7 @@ During the development the use of exception, i.e the use of the throw command, w
 1. Test finale message feature at the end of the game
 1. Test timer feature
 
-The testing was carried repeatedly until no exceptions were generated and no bugs were found and errors were encountered.
+The testing was carried out repeatedly during development until no exceptions were generated and no bugs were found and no errors were encountered.
 
 #### No Javascript support testing
 
@@ -80,7 +80,7 @@ To test how this website is displayed on a browser with no Javascript support, t
 1. Click on Javascript
 1. Click on the option 'Don't allow sites to use Javascript'
 
-Javascript is now disabled and the testing of the site can be carried out. The worked fine with bugs detected. The message appears as shown below.
+Javascript is now disabled and the testing of the site can be carried out. The site worked fine with no bugs detected. The message appears as shown below.
 
 ![javascript no support warning](readme/no-javascript-warning.png)
 
@@ -114,7 +114,13 @@ To pass the test the css property, translate, had to be changed to transform.
 
 Test site used: [JSHint](https://jshint.com/)
 
-The code was uploaded to JSHint, tested and no errors were found.
+The code was uploaded to JSHint, tested and no errors were found. However it issued 47 warnings all to do with ES6 features being used. It was then retested with New JavaScript features (ES6) option selected as shown below.
+
+![ES6 compatibilty set](readme/jshint-configurations.png)
+
+After retesting it issued one warning as shown below.
+
+![warnings after ES6 option enabled](readme/jshint-warnings.png).
 
 #### Lighthouse reports
 
@@ -130,7 +136,7 @@ The reports have been genereated using Google Chrome after deployment to GitHub:
 
 ### Unfixed Bugs
 
-There are no known bugs. All code was tested repeatably until code is working correctly.
+There are no known bugs. All code was tested repeatedly during development until code is working correctly.
 
 ## Deployment
 
