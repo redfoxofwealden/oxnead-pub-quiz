@@ -34,15 +34,15 @@ The Oxnead Pub Quiz features a Instructions, which also serves as a home page. T
 
 At the end of the game one of the three pages will be displayed depending on the score achieved.
 
-If the user all the questions and gets one or more within the time limit it displays the score as shown below.
+If the user answers all the questions and gets one or more correct within the time limit it displays the score as shown below.
 
 ![score page](readme/quiz-score-result.png)
 
-If the user does not answer within the time limit, the game will stop and the message shown below is displayed.
+If the user does not answer all the questions within the time limit, the game will stop and the message shown below is displayed.
 
 ![times up page](readme/times-up-result.png)
 
-If the player gets all the questions right within the alloted time a congratulatory message is displayed as below.
+If the player gets all the questions right within the time limit a congratulatory message is displayed as below.
 
 ![congratulation page](readme/congrats-all-questions-result.png)
 
@@ -58,7 +58,7 @@ The following tests were carried out during the development of the game.
 
 #### Testing during development
 
-During the development the use of exception, i.e the use of the throw command, was used in functions where arguments are used. An exception would be generated if the arguments passes are not of the correct type, i.e. string, number, object, boolean etc.
+During the development the use of exception, i.e the use of the throw command, was used in functions where arguments are used. An exception would be generated if the arguments passed are not of the correct type, i.e. string, number, object, boolean etc.
 
 1. Test event handlers after adding them to buttons
 1. Test functions randoniser functions
@@ -80,7 +80,7 @@ To test how this website is displayed on a browser with no Javascript support, t
 1. Click on Javascript
 1. Click on the option 'Don't allow sites to use Javascript'
 
-Javascript is now disabled and the testing of the site can be carried out. The site worked fine with no bugs detected. The message appears as shown below.
+Javascript is now disabled and the testing of the site can be carried out. The site worked fine with no bugs detected. The message now appears correctly as shown below.
 
 ![javascript no support warning](readme/no-javascript-warning.png)
 
@@ -90,13 +90,13 @@ The background has been tested to ensure it covers the whole viewport in the bro
 
 #### Responsive Testing
 
-The website was tested on Google Chrome using the responsive feature on web developer tools. The site was tested against these devices: iPhoneSE, iPhoneXR, iPhone Pro 12, Pixel 5, Samsung Galaxy S8+, Samsung Galaxy S20 Ultra, iPad Air, iPad Mini, Surface Pro 7, Surface Duo, Galaxy Fold, Samsung Galaxy A51/71, Nest Hub, Nest Hub Max, Facebook on Android v407 on Pixel 6.
+The website was tested on Google Chrome using the responsive feature on web developer tools after deployment. The site was tested against these devices: iPhoneSE, iPhoneXR, iPhone Pro 12, Pixel 5, Samsung Galaxy S8+, Samsung Galaxy S20 Ultra, iPad Air, iPad Mini, Surface Pro 7, Surface Duo, Galaxy Fold, Samsung Galaxy A51/71, Nest Hub, Nest Hub Max, Facebook on Android v407 on Pixel 6.
 
 #### HTML Validation Test
 
 Test site used: [W3C HTML validation test site](https://validator.w3.org/#validate_by_input)
 
-The attribute used on one the buttons, disabled, had to be changed from 'disabled="true", to 'disabled' to pass the html validation test.
+The attribute, disabled, used on one the buttons had to be changed from, disabled="true", to 'disabled' to pass the html validation test.
 
 ![html validation test result](readme/w3c-html-validation-test-result.png)
 
@@ -106,7 +106,7 @@ No errors were found however six warnings have issued: most to do with empty hea
 
 Test site used: [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/#validate_by_input)
 
-To pass the test the css property, translate, had to be changed to transform.
+To pass the test the css property, translate, had to be changed to transform with the translate function. After this change the result is as displayed below.
 
   ![css validation test result](readme/w3c-css-validation-test-result.png)
 
@@ -114,7 +114,7 @@ To pass the test the css property, translate, had to be changed to transform.
 
 Test site used: [JSHint](https://jshint.com/)
 
-The code was uploaded to JSHint, tested and no errors were found. However it issued 47 warnings all to do with ES6 features being used. It was then retested with New JavaScript features (ES6) option selected as shown below.
+The code was copied to JSHint, tested and no errors were found. However it issued 47 warnings all to do with ES6 features being used. It was then retested with New JavaScript features (ES6) option selected and with the configuration options as shown below.
 
 ![ES6 compatibilty set](readme/jshint-configurations.png)
 
