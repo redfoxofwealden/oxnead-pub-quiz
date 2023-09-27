@@ -16,6 +16,10 @@ The live website can be found [here](https://redfoxofwealden.github.io/oxnead-pu
 
 [Credits](#credits)
 
+## Technologies Used
+
+HTML, CSS and Javascript.
+
 ## Design
 
 It is a game where the player has to answer all ten questions within sixty seconds. The game asks ten questins in random order, with each question being asked only once per gaming session. The user reponds to each question by tapping on one of the four buttons. Each of the 4 buttons display a possible answer in random order. The background colour goes green when the user selects the correct answer, red if the answer is wrong. After all the questions have been asked, a form will be displayed showing the score. A congratulatory message will be displayed if all the questions have been correctly. A \'Times Up!\' message will be displayed if the time has elapsed and the user has not answered all the questions. The user at any time can stop the game by tapping \'Reset\' and this will take it back to the home page.
