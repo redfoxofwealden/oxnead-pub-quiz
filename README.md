@@ -118,7 +118,7 @@ To pass the test the css property, translate, had to be changed to transform wit
 
 Test site used: [JSHint](https://jshint.com/)
 
-The code was copied to JSHint, tested and no errors were found. However it issued 47 warnings all to do with ES6 features being used. It was then retested with New JavaScript features (ES6) option selected and with the configuration options as shown below.
+The code was copied to JSHint, tested and no errors were found. However it issued 52 warnings all to do with ES6 features being used. It was then retested with New JavaScript features (ES6) option selected and with the configuration options as shown below.
 
 ![ES6 compatibilty set](readme/jshint-configurations.png)
 
