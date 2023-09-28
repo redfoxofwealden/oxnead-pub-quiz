@@ -22,17 +22,17 @@ HTML, CSS and Javascript.
 
 ## Design
 
-It is a game where the player has to answer all ten questions within sixty seconds. The game asks ten questins in random order, with each question being asked only once per gaming session. The user reponds to each question by tapping on one of the four buttons. Each of the 4 buttons display a possible answer in random order. The background colour goes green when the user selects the correct answer, red if the answer is wrong. After all the questions have been asked, the home page will be displayed showing the score. A congratulatory message will be displayed if all the questions have been correctly. A \'Times Up!\' message will be displayed if the time has elapsed and the user has not answered all the questions. The user at any time can stop the game by tapping \'Reset\' and this will take it back to the home page.
+It is a game where the player has to answer all ten questions within sixty seconds. The game asks ten questions in random order, with each question being asked only once per gaming session. The user reponds to each question by tapping on one of the four buttons. Each of the 4 buttons display a possible answer in random order. The background colour goes green when the user selects the correct answer, red if the answer is wrong. After all the questions have been asked, the home page will be displayed showing the score. A congratulatory message will be displayed if all the questions have been correctly. A \'Times Up!\' message will be displayed if the time has elapsed and the user has not answered all the questions. The user at any time can stop the game by tapping \'Reset\' and this will take it back to the home page.
 
 ### Detects whether javascript is supported on the browser
 
-The first thing the website does is detect whether the browser supports javascript. If it does the home page is display. Otherwise a no javascript support error message is displayed and does nothing afterwards.
+The first thing the website does is detect whether the browser supports javascript. If it does the home page is displayed. Otherwise a no javascript support error message is displayed and does nothing afterwards.
 
 ## Features
 
 ### Home page
 
-The Oxnead Pub Quiz features a Instructions, which also serves as a home page. This is also the page that the site returns to after the user taps or clicks on Reset button.
+The Oxnead Pub Quiz landing page displays the instructions, which also serves as a home page. This is also the page that the site returns to after the user taps or clicks on Reset button.
 
 ![Home page](readme/home-page.png)
 
@@ -62,7 +62,7 @@ The following tests were carried out during the development of the game.
 
 #### Testing during development
 
-During the development the use of exception, i.e the use of the throw command, was used in functions where arguments are used. An exception would be generated if the arguments passed are not of the correct type, i.e. string, number, object, boolean etc. The following actions were carried out during development:-
+During the development of the game the use of exceptions, i.e the use of the throw command, was used in functions where arguments are used. An exception would be generated if the arguments passed are not of the correct type, i.e. string, number, object, boolean etc. The following actions were carried out during development:-
 
 1. Test event handlers after adding them to buttons
 1. Test functions randoniser functions
@@ -92,7 +92,7 @@ Javascript is now disabled and the testing of the site can be carried out. The s
 
 #### Test Background image
 
-The background has been tested to ensure it covers the whole viewport in the browser.
+The background image has been tested to ensure it covers the whole viewport in the browser.
 
 The bug that was encountered on the first attempt was that the image did not cover the whole viewport. This was corrected by setting min-height property of the 'main' element to 100vh in CSS.
 
@@ -100,7 +100,7 @@ The bug that was encountered on the first attempt was that the image did not cov
 
 The website was tested on Google Chrome using the responsive feature on web developer tools after deployment. The site was tested against these devices: iPhoneSE, iPhoneXR, iPhone Pro 12, Pixel 5, Samsung Galaxy S8+, Samsung Galaxy S20 Ultra, iPad Air, iPad Mini, Surface Pro 7, Surface Duo, Galaxy Fold, Samsung Galaxy A51/71, Nest Hub, Nest Hub Max, Facebook on Android v407 on Pixel 6.
 
-By default the width and height properties of the div elements are set 100%. The setting of the min-height, min-width and max-width, max-height properties was done based on the results of testing of how it was displayed in the devices listed above.
+By default the width and height properties of the div elements are set 100%. The setting of the min-height, min-width and max-height, max-width properties was done based on the results of testing of how it was displayed in the devices listed above.
 
 #### HTML Validation Test
 
@@ -124,7 +124,7 @@ To pass the test the css property, translate, had to be changed to transform wit
 
 Test site used: [JSHint](https://jshint.com/)
 
-The code was copied to JSHint, tested and no errors were found. However it issued 52 warnings all to do with ES6 features being used. It was then retested with New JavaScript features (ES6) option selected and with the configuration options as shown below.
+The code was copied to JSHint, tested and no errors were found. However it issued 52 warnings all to do with ES6 features being used. It was then retested with New JavaScript features (ES6) option selected in the configuration settings as shown below.
 
 ![ES6 compatibilty set](readme/jshint-configurations.png)
 
