@@ -22,11 +22,11 @@ HTML, CSS and Javascript.
 
 ## Design
 
-It is a game where the player has to answer all ten questions within sixty seconds. The game asks ten questins in random order, with each question being asked only once per gaming session. The user reponds to each question by tapping on one of the four buttons. Each of the 4 buttons display a possible answer in random order. The background colour goes green when the user selects the correct answer, red if the answer is wrong. After all the questions have been asked, a form will be displayed showing the score. A congratulatory message will be displayed if all the questions have been correctly. A \'Times Up!\' message will be displayed if the time has elapsed and the user has not answered all the questions. The user at any time can stop the game by tapping \'Reset\' and this will take it back to the home page.
+It is a game where the player has to answer all ten questions within sixty seconds. The game asks ten questins in random order, with each question being asked only once per gaming session. The user reponds to each question by tapping on one of the four buttons. Each of the 4 buttons display a possible answer in random order. The background colour goes green when the user selects the correct answer, red if the answer is wrong. After all the questions have been asked, the home page will be displayed showing the score. A congratulatory message will be displayed if all the questions have been correctly. A \'Times Up!\' message will be displayed if the time has elapsed and the user has not answered all the questions. The user at any time can stop the game by tapping \'Reset\' and this will take it back to the home page.
 
 ### Detects whether javascript is supported on the browser
 
-The first thing the website does is detect whether the browser supports javascript. If it does the form is display. Otherwise a no javascript support error message is displayed and does nothing afterwards.
+The first thing the website does is detect whether the browser supports javascript. If it does the home page is display. Otherwise a no javascript support error message is displayed and does nothing afterwards.
 
 ## Features
 
@@ -62,7 +62,7 @@ The following tests were carried out during the development of the game.
 
 #### Testing during development
 
-During the development the use of exception, i.e the use of the throw command, was used in functions where arguments are used. An exception would be generated if the arguments passed are not of the correct type, i.e. string, number, object, boolean etc.
+During the development the use of exception, i.e the use of the throw command, was used in functions where arguments are used. An exception would be generated if the arguments passed are not of the correct type, i.e. string, number, object, boolean etc. The following actions were carried out during development:-
 
 1. Test event handlers after adding them to buttons
 1. Test functions randoniser functions
@@ -73,6 +73,8 @@ During the development the use of exception, i.e the use of the throw command, w
 1. Test timer feature
 
 The testing was carried out repeatedly during development until no exceptions were generated and no bugs were found and no errors were encountered.
+
+The bugs that were encounterd were spelling mistakes in identifiers in variable, const and statements. These were corrected after testing.
 
 #### No Javascript support testing
 
@@ -92,9 +94,13 @@ Javascript is now disabled and the testing of the site can be carried out. The s
 
 The background has been tested to ensure it covers the whole viewport in the browser.
 
+The bug that was encountered on the first attempt was that the image did not cover the whole viewport. This was corrected by setting min-height property of the 'main' element to 100vh in CSS.
+
 #### Responsive Testing
 
 The website was tested on Google Chrome using the responsive feature on web developer tools after deployment. The site was tested against these devices: iPhoneSE, iPhoneXR, iPhone Pro 12, Pixel 5, Samsung Galaxy S8+, Samsung Galaxy S20 Ultra, iPad Air, iPad Mini, Surface Pro 7, Surface Duo, Galaxy Fold, Samsung Galaxy A51/71, Nest Hub, Nest Hub Max, Facebook on Android v407 on Pixel 6.
+
+By default the width and height properties of the div elements are set 100%. The setting of the min-height, min-width and max-width, max-height properties was done based on the results of testing of how it was displayed in the devices listed above.
 
 #### HTML Validation Test
 
@@ -104,7 +110,7 @@ The attribute, disabled, used on one the buttons had to be changed from, disable
 
 ![html validation test result](readme/w3c-html-validation-test.png)
 
-No errors were found however four warnings have issued: all to do with empty headings on the '\h2'\ elements.
+No errors were found however six warnings have been issued: four to do with empty headings on the '\h2'\ elements and two warnings about the use of \'h1\' elements.
 
 #### CSS Validation Test
 
@@ -128,7 +134,7 @@ After retesting it issued one warning as shown below.
 
 #### Lighthouse reports
 
-The reports have been genereated using Google Chrome after deployment to GitHub: one for mobile devices, the other for desktop.
+The reports have been produced using Google Chrome after deployment to GitHub: one for mobile devices, the other for desktop.
 
 ##### Mobile devices
 
@@ -140,7 +146,7 @@ The reports have been genereated using Google Chrome after deployment to GitHub:
 
 ### Unfixed Bugs
 
-There are no known bugs. All code was tested repeatedly during development until code is working correctly.
+There are no known bugs to fix. All code was tested repeatedly during development until code is working correctly.
 
 ## Deployment
 
